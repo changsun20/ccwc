@@ -1,35 +1,9 @@
 #include <CLI/CLI.hpp>
-#include <cstdint>
-#include <fstream>
 #include <ios>
 #include <iostream>
-#include <ostream>
 #include <string>
 
-namespace wc {
-uint64_t count_bytes(std::ifstream &input) {
-    char buffer[1024];
-
-    uint64_t byte_count = 0;
-    while (input.read(buffer, sizeof(buffer))) {
-        byte_count += sizeof(buffer);
-    }
-    byte_count += input.gcount();
-
-    return byte_count;
-}
-
-uint64_t count_lines(std::ifstream &input) {
-    uint64_t line_count = 0;
-
-    std::string line;
-    while (std::getline(input, line)) {
-        line_count += 1;
-    }
-
-    return line_count;
-}
-} // namespace wc
+#include "wc_utils.hpp"
 
 int main(int argc, char **argv) {
     CLI::App app;

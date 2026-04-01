@@ -23,6 +23,7 @@
             cmake
             gcc
             gdb
+            cli11
           ];
         };
       }

@@ -24,6 +24,7 @@
             gcc
             gdb
             cli11
+            catch2_3
           ];
         };
       }

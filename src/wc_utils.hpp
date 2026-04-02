@@ -1,13 +1,14 @@
 #include <cstdint>
 #include <istream>
+#include <optional>
 
 #ifndef WC_UTILS_H_
 #define WC_UTILS_H_
 
 namespace wc {
 
-uint64_t count_bytes(std::istream &input);
-uint64_t count_lines(std::istream &input);
+std::optional<uint64_t> count_bytes(std::istream &input);
+std::optional<uint64_t> count_lines(std::istream &input);
 
 } // namespace wc
 

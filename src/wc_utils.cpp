@@ -1,8 +1,10 @@
 #include <cstdint>
 #include <istream>
+#include <optional>
+#include <sys/types.h>
 
 namespace wc {
-uint64_t count_bytes(std::istream &input) {
+std::optional<uint64_t> count_bytes(std::istream &input) {
     char buffer[1024];
 
     uint64_t byte_count = 0;
@@ -14,7 +16,7 @@ uint64_t count_bytes(std::istream &input) {
     return byte_count;
 }
 
-uint64_t count_lines(std::istream &input) {
+std::optional<uint64_t> count_lines(std::istream &input) {
     uint64_t line_count = 0;
 
     std::string line;

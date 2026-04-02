@@ -1,6 +1,8 @@
 #include <CLI/CLI.hpp>
+#include <cstdlib>
 #include <ios>
 #include <iostream>
+#include <ostream>
 #include <string>
 
 #include "wc_utils.hpp"
@@ -21,13 +23,36 @@ int main(int argc, char **argv) {
 
     if (lflag) {
         std::ifstream file(filename);
-        std::cout << " " << wc::count_lines(file);
+
+        if (!file.is_open()) {
+            std::cerr << "Cannot open file: " << filename << std::endl;
+            return EXIT_FAILURE;
+        }
+
+        if (auto lines_num = wc::count_lines(file)) {
+            std::cout << " " << lines_num.value();
+        } else {
+            std::cerr << "Failed when counting lines of the file.\n";
+            return EXIT_FAILURE;
+        }
     }
 
     if (cflag) {
         std::ifstream file(filename, std::ios::binary);
-        std::cout << " " << wc::count_bytes(file);
+
+        if (!file.is_open()) {
+            std::cerr << "Cannot open file: " << filename << std::endl;
+            return EXIT_FAILURE;
+        }
+
+        if (auto bytes_num = wc::count_bytes(file)) {
+            std::cout << " " << bytes_num.value();
+        } else {
+            std::cerr << "Failed when counting lines of the file.\n";
+            return EXIT_FAILURE;
+        }
     }
 
     std::cout << " " << filename << std::endl;
+    return 0;
 }
